@@ -12,8 +12,11 @@ type NoteModalProps = {
 
 export default function NoteModal({ note, isEdit = false}: NoteModalProps) {
   let [isOpen, setIsOpen] = useState(false);
+  const [tag, setTag] = useState('');
   const addNote = useNotesStore(state => state.addNote);
   const editNote = useNotesStore(state => state.editNote);
+  const addTag = useNotesStore(state => state.addTag);
+  const tags = useNotesStore(state => state.tags);
 
   const closeModal = () => {
     setIsOpen(false);
@@ -33,6 +36,7 @@ export default function NoteModal({ note, isEdit = false}: NoteModalProps) {
         archived: false,
         tags: formData.get('tags') as unknown as string[]
       }
+      console.log(formData.get('tags'));
       addNote(note);
     }
 
@@ -126,12 +130,25 @@ export default function NoteModal({ note, isEdit = false}: NoteModalProps) {
                         className="form-control mb-4"
                         multiple
                       >
-                        {new Array(5).fill("").map((el, idx) => (
-                          <option value={el} key={idx}>
-                            Tag Name {idx}
+                        {tags.map((tag, idx) => (
+                          <option value={tag} key={idx}>
+                            Tag - {tag}
                           </option>
                         ))}
                       </select>
+                      <div className="mb-4 flex items-center">
+                        <input
+                          type="text"
+                          name="tag-name"
+                          value={tag}
+                          onChange={ev => setTag(ev.target.value)}
+                          placeholder="Category name"
+                          className="form-control"
+                        />
+                        <button onClick={() => addTag(tag)} type="button" className="btn-primary ml-4 whitespace-nowrap">
+                          + category
+                        </button>
+                      </div>
 
                       {/* <p className="text-sm text-gray-500">
                         Your payment has been successfully submitted. We’ve sent

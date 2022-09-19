@@ -7,6 +7,7 @@ interface NotesStore {
   notes: Note[],
   tags: string[],
   addNote: (note: Note) => void
+  addTag: (tag: string) => void
   editNote: (noteToEdit: Note) => void,
   deleteNote: (id: number) => void,
   archiveNote: (id: number) => void,
@@ -19,6 +20,7 @@ const useNotesStore = create<NotesStore>()(
         notes: api.notes.list(),
         tags: [],
         addNote: note => set(state => ({ notes: [ note, ...state.notes ] })),
+        addTag: tag => set(state => ({ tags: [ tag, ...state.tags ] })),
         editNote: noteToEdit => set(state => ({
           notes: state.notes.map(note => {
             if (note.id == noteToEdit.id) {
