@@ -9,10 +9,6 @@ export type Note = {
   tags: string[]
 }
 
-export interface NoteCardProps {
-  note: Note
-}
-
 export interface LayoutProps {
     children?: ReactNode
 }

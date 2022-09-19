@@ -3,13 +3,24 @@ import { NoteCardProps } from "../types";
 export const api = {
   notes: {
     list() {
-      return new Array(2).fill({
-        id: Date.now(),
-        title: "Some old note",
-        content: "Lorem ipsum dolor amet sarasa",
-        lasEdited: "10/10/2022",
-        archived: false
-      });
-    }
-  }
-}
+      return [
+        {
+          id: Date.now() + 1,
+          title: "Some old note",
+          copy: "Lorem ipsum dolor amet sarasa",
+          lastEdited: "10/10/2022",
+          archived: false,
+          tags: []
+        },
+        {
+          id: Date.now() + 2,
+          title: "Some old note",
+          copy: "Lorem ipsum dolor amet sarasa",
+          lastEdited: "10/10/2022",
+          archived: false,
+          tags: []
+        },
+      ];
+    },
+  },
+};
